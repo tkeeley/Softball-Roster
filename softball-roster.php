@@ -17,10 +17,26 @@ function create_roster_post_type() {
             'public'      => true,
             'has_archive' => true,
             'supports'    => array('title'),
+            'menu_icon'   => plugins_url('softball_icon.png', __FILE__),
         )
     );
 }
 add_action('init', 'create_roster_post_type');
+
+
+// Add custom CSS to resize the menu icon
+function roster_plugin_admin_styles() {
+    echo '<style>
+        #adminmenu .menu-icon-roster div.wp-menu-image {
+            background-size: 20px 20px !important;
+        }
+        #adminmenu .menu-icon-roster div.wp-menu-image img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>';
+}
+add_action('admin_head', 'roster_plugin_admin_styles');
 
 // Flush rewrite rules on activation and deactivation
 function roster_plugin_activate() {
